@@ -1,0 +1,2 @@
+# evenstar
+Event Management App
