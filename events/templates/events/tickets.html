@@ -1,0 +1,232 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="singleContentBoxWide mt-5">
+        <div class="card-md-fixed singleContent place-self-center">
+            <h3 class="timeNspace text-center">Tickets</h3>
+            <div class="d-flex flex-column justify-content-center mt-2">
+                <ul id="humansList">
+                </ul>
+                <div id="humanFormContainer">
+                    <form id="humanForm" action="{% url "ajaxAddHuman" %}" class="d-flex flex-column justify-content-center mt-2">
+
+                        {% csrf_token %}
+
+                        <label>Name:
+                            <input type="text" class="form-control" name="name">
+                        </label>
+
+                        <div id="childCheck" class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="isChild" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Child under 12
+                            </label>
+                        </div>
+
+                        <label class="mt-2">Email (<span id="emailRequired">required</span>):
+                            <input type="email" class="form-control" name="email">
+                        </label>
+
+                        <div class="mt-2">
+                        <label>How Many nights will you be camping?</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="nights" value="1">
+                            <label class="form-check-label">
+                                1
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="nights" value="2" checked>
+                            <label class="form-check-label">
+                                2
+                            </label>
+                        </div>
+                    </div>
+
+                    </form>
+
+                    <div class="d-flex flex-row justify-content-center">
+                        <button type="button" class="btn btn-primary me-1" id="addHumanBtn"> 
+                            <i class="fas fa-plus fa-sm"></i> Add Another
+                        </button>
+                        <button type="button" class="btn btn-primary ms-1" id="okHumansBtn"> 
+                            OK
+                        </button>
+                    </div>
+                </div>
+
+                <div id="ticketTypeContainer" class="mt-2 collapse">
+                    <div class="d-flex flex-column justify-content-center">
+                        <label>Select Ticket Type</label>
+                        <div class="form-check">
+                            <input class="form-check-input typeRadio" type="radio" name="ticketType" value="crew">
+                            <label class="form-check-label">
+                                Suggested: Just pay for your camping spot, $33/night for adults, $16.50/night for kids
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input typeRadio" type="radio" name="ticketType" value="custom" id="pwycRadio">
+                            <label class="form-check-label">
+                                Pay What You Can: $0? $573.62? Whatever works for you. I just want you to be there.
+                            </label>
+                        </div>
+                        <label id="customAmountContainer" class="mt-2 collapse">Enter total amount:
+                            <input type="number" id="customAmount" class="form-control">
+                        </label>
+
+                    <div class="d-flex flex-row justify-content-center mt-2">
+                        <button type="button" class="btn btn-primary" id="okTypeBtn" disabled> 
+                            Get my tickets!
+                        </button>
+                    </div>
+                    </div>
+                    
+                </div>
+
+                <div id="paymentContainer" class="mt-2 collapse">
+                    <div class="d-flex flex-column justify-content-center">
+                        <div class="text-center paymentBig">Your tickets are booked!</div>
+                        <div class="mt-2">Payment is via bank transfer. Please transfer:</div>
+                        <div class="d-flex flex-row justify-content-center paymentBig">
+                            <div>$<span id="totalAmount"></span></div>
+                        </div>
+                        <div class="mt-2">Please use this as the description:</div>
+                        <div class="d-flex flex-row justify-content-center paymentBig">
+                            <div>Starfest <span id="paymentToken"></span></div>
+                        </div>
+                        <div class="mt-2">To transfer with PayID, use my phone number:</div>
+                        <div class="d-flex flex-row justify-content-center paymentBig">
+                            <div>0438438439</div>
+                        </div>
+                        <div class="mt-2">Or:</div>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div>Name: <b>Nathan Sam Guerry</b><br>BSB: <b>062236</b><br>Acc: <b>10047963</b></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block inlineJS %}
+<script>
+    $(document).ready(function(){
+        let humans = [];
+        let ticketType, paymentId, paymentToken;
+
+        $("#childCheck").hide();
+
+        $("#addHumanBtn").click(submitHuman)
+
+        $("#okHumansBtn").click(async function() {
+            let ok = await submitHuman();
+            if (ok) {
+                console.log("hiding")
+                $("#humanFormContainer").hide();
+                $("#ticketTypeContainer").show();
+            } else {
+                console.log("not hiding")
+            }
+        })
+
+        async function submitHuman(){
+            $("#message").slideUp();
+            let $form = $("#humanForm");
+            res = await postForm($form)
+            console.log(res)
+            if (res.errors){
+                let errs = JSON.parse(res.errors)
+                let msg = res.msg;
+                for (const [key, err] of Object.entries(errs)){
+                    $($form).find(`input[name=${key}]`).addClass('is-invalid')
+                    if (key == "__all__") {
+                        $form.find("input").addClass('is-invalid')
+                    }
+                    msg += ` ${key}:`
+                    for (const m of err){
+                        msg += " " + m.message
+                    }
+                }
+                $("#messageContent").text(msg);
+                $("#message").slideDown();
+            }
+            if (res.human) {
+                humans.push(res.human)
+                $("#humansList").append(`<li>${res.human.name}</li>`)
+                $("#childCheck").show();
+                $("#emailRequired").text("Optional")
+                $form[0].reset();
+            }
+
+            return res.ok
+        }
+
+        $(".typeRadio").change(function(){
+            console.log("changed")
+            if ($(this).val() == "custom"){
+                console.log("showing")
+                $("#customAmountContainer").show()
+                $("#okTypeBtn").prop('disabled', $("#customAmount").val() == "")
+            } else {
+                console.log("hiding")
+                $("#customAmountContainer").hide()
+                $("#okTypeBtn").prop('disabled', false)
+            }
+            ticketType = $(this).val()
+        })
+
+        $("#customAmount").on('input', function(){
+            $("#okTypeBtn").prop('disabled', $("#customAmount").val() == "")
+        })
+
+        $("#okTypeBtn").click( async function(){
+            //create payment
+            let url = '{% url "ajaxCreatePayment" %}';
+            let amount = 0;
+            if ($(".typeRadio:checked").val() == "custom"){
+                amount = $("#customAmount").val()
+            }
+            let data = [
+                {'name': 'csrfmiddlewaretoken', 'value': '{{ csrf_token }}'},
+                {'name': 'contact', 'value': humans[0].id},
+                {'name': 'amount', 'value': amount}
+            ]
+            let res = await postData(url, $.param(data))
+            console.log(res)
+            if (res.ok) {
+                paymentId = res.paymentId;
+                paymentToken = res.token;
+            }
+
+            //create tickets
+            for await (const human of humans){
+                let url = '{% url "ajaxCreateTicket" %}'
+                let data = [
+                    {'name': 'csrfmiddlewaretoken', 'value': '{{ csrf_token }}'},
+                    {'name': 'human', 'value': human.id},
+                    {'name': 'nights', 'value': human.nights},
+                    {'name': 'ticketType', 'value': ticketType},
+                    {'name': 'payment', 'value': paymentId},
+                ]
+                let res = await postData(url, $.param(data))
+                console.log(res)
+            }
+
+            //get the total amount
+            url = '{% url "ajaxPaymentAmount" "!paymentId" %}'
+            url = url.replace("!paymentId", paymentId)
+            let response = await fetch(url)
+            res = await response.json();
+            console.log(res)
+            $("#totalAmount").text(res.amount)
+            $("#paymentToken").text(paymentToken)
+            $("#ticketTypeContainer").hide();
+            $("#paymentContainer").show();
+
+        })
+    });
+
+</script>
+{% endblock inlineJS %}

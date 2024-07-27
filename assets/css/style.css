@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'timeNspace';
+    src: url('/static/fonts/Time N Space.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'spaceJunk';
+    src: url('/static/fonts/spacejunkXL.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    height: 100%;
+}
+
+body{
+    margin: 0px;
+    font-family: Muli, sans-serif;
+    background-color: #F0F0FA;
+    /* padding-top: 50px; */
+}
+
+
+label{
+    font-weight: bold;
+    display: block;
+}
+
+.mainContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.backgroundImage{
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+    z-index: -99;
+}
+
+.bgwidth { width: 100%; height: auto;}
+.bgheight { height: 100%; width: auto;}
+
+.timeNspace {
+    font-family: timeNspace;
+}
+
+.spaceJunk {
+    font-family: spaceJunk;
+}
+
+.mainHeader {
+    color: white;
+    font-size: 8vw;
+    font-weight: bold;
+}
+
+.subHeader {
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+    line-height: 3vw;
+}
+
+.paymentBig {
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 1.5rem;
+}
+
+.btn-hero {
+    border-radius: 1.5rem !important;
+    font-weight: bold !important;
+    font-size: 2.5vw;
+    padding: 1rem 2rem !important;
+}
+
+
+.singleContentBox {
+    /* margin-top: 80px; */
+    display: grid;
+    grid-template-columns: 1fr minmax(min-content, 500px) 1fr;
+}  
+
+
+.singleContentBoxWide {
+    /* margin-top: 2rem; */
+    display: grid;
+    grid-template-columns: 1fr minmax(min-content, 80vw) 1fr;
+    max-width: 100vw;
+}  
+
+.singleContentBoxMd {
+    /* margin-top: 80px; */
+    display: grid;
+    grid-template-columns: 1fr minmax(min-content, 700px) 1fr;
+}  
+
+.singleContent {
+    grid-column: 2 / 3;
+}
+
+.place-self-center {
+    place-self: center;
+}
+
+
+.card-sm {
+    margin: 0.3rem;
+    padding: 1rem;
+    max-width: 25rem;
+    height: min-content;
+    border: 1px solid rgba(0, 0, 0, .0.8);
+    border-radius: 0.35rem;
+    background-color: rgba(255,255,255, 0.8);
+}
+
+.card-md {
+    margin: 0.3rem;
+    padding: 1rem;
+    max-width: 30rem;
+    height: min-content;
+    border: 1px solid rgba(0, 0, 0, .0.8);
+    border-radius: 0.35rem;
+    background-color: rgba(255,255,255, 0.8);
+}
+
+.card-md-fixed {
+    margin: 0.3rem;
+    padding: 1rem;
+    width: 30rem;
+    max-width: 90vw;
+    height: min-content;
+    border: 1px solid rgba(0, 0, 0, .0.8);
+    border-radius: 0.35rem;
+    background-color: rgba(255,255,255, 0.8);
+}
+
+.card-lg {
+    margin: 0.3rem;
+    padding: 1rem;
+    max-width: 60rem;
+    height: min-content;
+    border: 1px solid rgba(0, 0, 0, .0.8);
+    border-radius: 0.35rem;
+    background-color: rgba(255,255,255, 0.8);
+}
+
+.card-lg-fixed {
+    margin: 0.3rem;
+    padding: 1rem;
+    width: 60rem;
+    height: min-content;
+    border: 1px solid rgba(0, 0, 0, .0.8);
+    border-radius: 0.35rem;
+    background-color: rgba(255,255,255, 0.8);
+}
