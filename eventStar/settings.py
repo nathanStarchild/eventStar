@@ -30,9 +30,12 @@ else:
 DEBUG = os.environ.get('APP_ENVIRON') == "dev"
 
 if os.environ.get('APP_ENVIRON') == "dev":
-    ALLOWED_HOSTS = ['192.168.1.120']
+    ALLOWED_HOSTS = []
 else:
     ALLOWED_HOSTS = ['starfest.app', 'www.starfest.app']
+
+if os.environ.get('APP_ENVIRON') == "prod":
+    CSRF_TRUSTED_ORIGINS=['https://starfest.app']
 
 
 

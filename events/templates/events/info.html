@@ -1,0 +1,166 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="singleContentBoxWide mt-5">
+        <div class="card-md-fixed singleContent place-self-center">
+            <div class="d-flex flex-row flex-wrap justify-content-evenly mt-2">
+                <button class="btn btn-primary timeNspace btn-collapse mb-1" data-bs-target="#general">General</button>
+                <button class="btn btn-primary timeNspace btn-collapse mb-1 mx-1" data-bs-target="#schedule">Schedule</button>
+                <button class="btn btn-primary timeNspace btn-collapse mb-1" data-bs-target="#location">Location</button>
+            </div>
+            <div id="general" class="collapse show">
+                <div class="d-flex flex-column justify-content-center mt-2">
+                    <h3 class="timeNspace text-center">General</h3>
+                    <p>
+                        To celebrate my 40th Birthday, I want to gather together all of the communities that I pour so much time, love and energy into. Camping at a beautiful Central Coast location, surrounded by nature, interactive art, friends, music and creativity.
+                    </p>
+                    <p>
+                        <b>Dates:</b> 16th - 18th August 2024
+                    </p>
+                    <p>
+                        <b>Theme:</b> Out of this world
+                    </p>
+                    <p>
+                        <b>Leave No Trace:</b> This is a leave no trace event. No bins are provided. Pack in, pack out.
+                    </p>
+
+                    <p>
+                        <b>No Chemicals in the Creek:</b> None whatsoever. No shampoo, soap, detergent, sunscreen, insect
+                        repellent etc even natural ones.
+                    </p>
+
+                    <p>
+                        <b>Drive Slow:</b> All attendees are asked to drive slowly down the gravel road coming in and out of the
+                        property - there are many walkers, cyclists, horse riders, kids and wildlife on the road.
+                    </p>
+
+                    <p>
+                        <b>Ammenities:</b> There is a big beautiful toilet block with compost toilets and (hot) showers. TP and hand soap provided. Please read the signs explaining how the compost toilets work.
+                    </p>
+                    <p>
+                        <b>Water:</b> All water on the property is unfiltered rainwater and/or creek water. Please bring your own drinking water. There are two taps / wash up stations in the main paddock. Please be mindful and keep showers short.
+                    </p>
+                    <p>
+                        <b>BYO and DIY:</b> There will be a big pot luck dinner on Friday Night, and some bits and bobs here and there on Sat, but other than that please bring your own food, cooking set up, plate, bowl, cup, cuttlery, Bring your drum we will have a big drum around the fire on friday night. Bring your instruments for open mic and jams. Bring your flow toys, LED and fire especially.
+                    </p>
+                    
+                </div>
+            </div>
+            <div id="schedule" class="collapse">
+                <div class="d-flex flex-column justify-content-center mt-2 collapse">
+                    <h3 class="timeNspace text-center">Schedule</h3>
+                    <table class="table table-borderless">
+                        <thead class="thead-light text-center">
+                            <tr><th colspan="2" class="timeNspace">Friday 16th Aug</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <td>Arrive and set up any time</td>
+                            </tr>
+                            <tr>
+                                <th>From 18:00</th>
+                                <td>Pot luck Dinner. Bring a dish.</td>
+                            </tr>
+                            <tr>
+                                <th>19:00</th>
+                                <td>Bonfire and Drumming. Bring your drum.</td>
+                            </tr>
+                            <tr>
+                                <th>21:30</th>
+                                <td>Open Mic</td>
+                            </tr>
+                            <tr>
+                                <th>22:30</th>
+                                <td>Jams</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-borderless">
+                        <thead class="thead-light text-center">
+                            <tr><th colspan="2" class="timeNspace">Saturday 17th Aug</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Morning</th>
+                                <td>Free play. Face Paint Therapy happening all morning.</td>
+                            </tr>
+                            <tr>
+                                <th>12:00</th>
+                                <td>Opening Ceremony and Starchild performs. Don't miss this!</td>
+                            </tr>
+                            <tr>
+                                <th>13:00</th>
+                                <td>Fashion Parade</td>
+                            </tr>
+                            <tr>
+                                <th>14:00</th>
+                                <td>Cacao Ceremony</td>
+                            </tr>
+                            <tr>
+                                <th>14:30</th>
+                                <td>Sound Healing</td>
+                            </tr>
+                            <tr>
+                                <th>15:30</th>
+                                <td>Live Music: Valley Girl Babble</td>
+                            </tr>
+                            <tr>
+                                <th>16:30</th>
+                                <td>Jams</td>
+                            </tr>
+                            <tr>
+                                <th>17:00</th>
+                                <td>LED Jewellery Making</td>
+                            </tr>
+                            <tr>
+                                <th>from 18:00</th>
+                                <td>DJs and performances, more details to come</td>
+                            </tr>
+                            <tr>
+                                <th>03:30</th>
+                                <td>K-Hole Choir</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-borderless">
+                        <thead class="thead-light text-center">
+                            <tr><th colspan="2" class="timeNspace">Sun 18th Aug</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <td>Kick ons, chill hangs and pack down</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="location" class="collapse">
+                <div class="d-flex flex-column justify-content-center mt-2 collapse">
+                    <h3 class="timeNspace text-center">Location</h3>
+                    <p>
+                        "40 Acres" on the Central Coast. 1.5 hours from Sydney. Address will be sent to ticket holders. Or msg Starchild to get it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block inlineJS %}
+<script>
+    $(document).ready(function(){
+        $(".btn-collapse").click(function(){
+            $target = $($(this).data("bs-target"))
+            if ($target.hasClass("show")){
+                return
+            }
+            $(".collapse.show").collapse("toggle")
+            $target.collapse("toggle")
+        })
+    });
+
+</script>
+{% endblock inlineJS %}

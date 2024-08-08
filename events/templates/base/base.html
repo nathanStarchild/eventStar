@@ -29,6 +29,19 @@
     </head>
     <body>
         <div class="mainContainer">
+                <nav class="navbar navbar-expand fixed-top nav-bg navbar-dark ps-5">
+                    <div class="container-fluid">
+                        <a class="navbar-brand timeNspace" href="/">Starfest</a>
+
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                            <a class="nav-link active" href="{% url "tickets" %}">Tickets</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link active" href="{% url "info" %}">Info</a>
+                            </li>
+                        </ul>
+                </nav>
 
             <div id="message" class="alert alert-warning alert-dismissible fade show" role="alert"
                 {% if message|length == 0 %} style="display: none;"{% endif %}

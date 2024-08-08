@@ -41,6 +41,13 @@ def index(request):
     context = {"message": "", "imageUrl": imgUrl()}
     return render(request, 'events/index.html', context)
 
+def info(request):
+    context = {
+        "message": "",
+        "imageUrl": imgUrl(),
+        }
+    return render(request, 'events/info.html', context)
+
 def tickets(request):
     humanForm = HumanForm()
     context = {

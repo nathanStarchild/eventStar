@@ -14,6 +14,7 @@
 
 html, body {
     height: 100%;
+    width: 100%;
 }
 
 body{
@@ -23,6 +24,13 @@ body{
     /* padding-top: 50px; */
 }
 
+.nav-bg {
+    background-image:linear-gradient(to bottom, rgba(46, 89, 138, 0.7), rgba(27, 100, 168, 0));
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+  }
 
 label{
     font-weight: bold;

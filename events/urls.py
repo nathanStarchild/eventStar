@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('tickets/', views.tickets, name='tickets'),
+    path('info/', views.info, name='info'),
 
     #ajax
     path('ajax/addHuman/', views.ajaxAddHuman, name='ajaxAddHuman'),
