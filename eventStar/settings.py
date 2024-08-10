@@ -35,7 +35,7 @@ else:
     ALLOWED_HOSTS = ['starfest.app', 'www.starfest.app']
 
 if os.environ.get('APP_ENVIRON') == "prod":
-    CSRF_TRUSTED_ORIGINS=['https://starfest.app']
+    CSRF_TRUSTED_ORIGINS=['https://starfest.app', 'https://www.starfest.app']
 
 
 
