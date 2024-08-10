@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.forms.models import model_to_dict
 from django.utils.crypto import get_random_string
 from django.db.utils import IntegrityError
+from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 
 from .forms import *
@@ -80,6 +81,25 @@ def ajaxAddHuman(request):
             'msg': msg,
             'errors': errors,
             "human": human,
+        })
+
+    except Exception as e:
+        print(str(e))
+        print(e)
+        return JsonResponse({"ok":False, "msg":str(e)})
+    
+@login_required
+def ajaxDeleteHuman(request, humanId):
+    try:
+        msg = ""
+        ok = False
+        human = Human.objects.get(pk=humanId)
+        human.delete()
+        ok = True
+        msg = "human delted"
+        return JsonResponse({
+            'ok': ok,
+            'msg': msg,
         })
 
     except Exception as e:
@@ -182,3 +202,12 @@ def ajaxPaymentAmount(request, paymentId):
         print(e)
         return JsonResponse({"ok":False, "msg":str(e)})
 
+@login_required
+def eventAdmin(request):
+    humans = Human.objects.order_by("name")
+    context = {
+        "message": "",
+        "imageUrl": imgUrl(),
+        "humans": humans,
+        }
+    return render(request, 'events/admin.html', context)
