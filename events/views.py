@@ -10,6 +10,9 @@ from .forms import *
 
 import random
 
+from io import StringIO
+import csv
+
 # Create your views here.
 
 def imgUrl():
@@ -211,3 +214,25 @@ def eventAdmin(request):
         "humans": humans,
         }
     return render(request, 'events/admin.html', context)
+
+
+@login_required
+def ticketList(request):
+    humans = Human.objects.order_by("name")
+    #create a file-like buffer to store the file
+    buffer = StringIO()
+    writer = csv.writer(buffer)
+    writer.writerow(["", "Name", "Nights"])
+    for n, h in enumerate(humans):
+        try:
+            nights = h.ticket.nights
+        except Ticket.DoesNotExist:
+            nights = ""
+        writer.writerow([n+1, h.name, nights])
+    for n in range(humans.count() + 1, 101):
+        writer.writerow([n])
+    filename = f"starfest tickets.csv"
+    response = HttpResponse(buffer.getvalue(), content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename={filename}'
+    buffer.close()
+    return response

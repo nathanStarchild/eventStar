@@ -8,6 +8,7 @@ urlpatterns = [
     path('tickets/', views.tickets, name='tickets'),
     path('info/', views.info, name='info'),
     path('eventAdmin/', views.eventAdmin, name='eventAdmin'),
+    path('ticketList/', views.ticketList, name='ticketList'),
 
     #ajax
     path('ajax/addHuman/', views.ajaxAddHuman, name='ajaxAddHuman'),
