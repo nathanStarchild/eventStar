@@ -20,7 +20,7 @@
                         {% for h in humans %}
                             <tr id="human{{h.id}}">
                                 <th>{{h.name}}</th>
-                                <td>{{h.ticket.id}}</td>
+                                <td>{{h.ticket.nights}}</td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-primary btn-delete" data-url="{% url 'ajaxDeleteHuman' h.id %}" data-row="#human{{h.id}}">
                                         <i class="far fa-trash-alt fa-sm"></i>
