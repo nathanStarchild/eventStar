@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for h in humans %}
+                        {% comment %} {% for h in humans %}
                             <tr id="human{{h.id}}">
                                 <th>{{h.name}}</th>
                                 <td>{{h.ticket.id}}</td>
@@ -27,6 +27,19 @@
                                     <button type="button" class="btn btn-sm btn-primary btn-delete" data-url="{% url 'ajaxDeleteHuman' h.id %}" data-row="#human{{h.id}}">
                                         <i class="far fa-trash-alt fa-sm"></i>
                                     </button>
+                                </td>
+                            </tr>
+                        {% endfor %} {% endcomment %}
+                        {% for h in tickets %}
+                            <tr id="ticket{{t.id}}">
+                                <th>{{t.human.name}}</th>
+                                <td>{{t.id}}</td>
+                                <td>{{t.nights}}</td>
+                                <td>{{t.human.isChild}}</td>
+                                <td>
+                                    {% comment %} <button type="button" class="btn btn-sm btn-primary btn-delete" data-url="{% url 'ajaxDeleteHuman' h.id %}" data-row="#human{{h.id}}">
+                                        <i class="far fa-trash-alt fa-sm"></i>
+                                    </button> {% endcomment %}
                                 </td>
                             </tr>
                         {% endfor %}

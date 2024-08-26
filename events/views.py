@@ -208,10 +208,12 @@ def ajaxPaymentAmount(request, paymentId):
 @login_required
 def eventAdmin(request):
     humans = Human.objects.order_by("name")
+    tickets = Ticket.objects.order_by("human__name")
     context = {
         "message": "",
         "imageUrl": imgUrl(),
         "humans": humans,
+        "tickets": tickets,
         }
     return render(request, 'events/admin.html', context)
 
